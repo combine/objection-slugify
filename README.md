@@ -16,7 +16,7 @@ const Slugify = require('objection-slugify');
 const { Model } = require('objection');
 
 // Mixin the plugin.
-const SluggedModel = Slugify(Base, {
+const SluggedModel = Slugify(Model, {
   sourceField: 'title',
   slugField: 'slug',
   unique: true
