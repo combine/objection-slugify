@@ -2,26 +2,52 @@
   "name": "objection-slugify",
   "version": "1.0.0",
   "description": "Automatically slugifies a source field.",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
+  "keywords": [
+    "objection",
+    "objection-js",
+    "objection-slugify",
+    "plugin",
+    "plugins",
+    "slug",
+    "slugify"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "calvinl",
+    "email": "callai@gmail.com",
+    "url": "https://callai.co"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/combine/objection-slugify.git"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "main": "dist/index.js",
   "scripts": {
-    "test": "$(npm bin)/jest -c ./test/support/jest.config.js"
+    "build": "$(npm bin)/babel index.js -d ./dist",
+    "jest": "$(npm bin)/jest -c ./test/support/jest.config.js",
+    "test": "npm run jest",
+    "cover": "npm run jest -- --coverage --forceExit",
+    "coveralls": "npm run cover && cat ./coverage/lcov.info | $(npm bin)/coveralls"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "slug": "^0.9.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
     "jest": "^22.4.2",
     "knex": "^0.14.4",
     "objection": "^1.0.0",
     "sqlite3": "^3.1.13"
+  },
+  "peerDependencies": {
+    "objection": ">=1.0.0"
   }
 }

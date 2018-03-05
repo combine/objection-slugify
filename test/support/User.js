@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import { Slugify } from '../../index';
+import { Slugify } from '../../src/index';
 
 const SluggedModel = Slugify(Model, {
   sourceField: 'name',
