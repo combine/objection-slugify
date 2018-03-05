@@ -30,7 +30,7 @@
     "jest": "$(npm bin)/jest -c ./test/support/jest.config.js",
     "test": "npm run jest",
     "cover": "npm run jest -- --coverage --forceExit",
-    "coveralls": "npm run cover && cat ./coverage/lcov.info | $(npm bin)/coveralls"
+    "coveralls": "npm run cover && cat ./test/coverage/lcov.info | $(npm bin)/coveralls"
   },
   "dependencies": {
     "slug": "^0.9.1"

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/combine/objection-slugify.svg?branch=master)](https://travis-ci.org/combine/objection-slugify)
+
 # Slugged models for Objection.js
 
 This plugin will automatically generate slugs for your model based on a source
