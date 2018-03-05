@@ -9,7 +9,7 @@ if the slug already exists in the model's table.
 
 ## Installation
 ```
-npm install objection-slugify
+npm install objection-slugify --save
 ```
 
 ## Usage
