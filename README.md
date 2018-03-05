@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/combine/objection-slugify.svg?branch=master)](https://travis-ci.org/combine/objection-slugify)
+[![Coverage Status](https://coveralls.io/repos/github/combine/objection-slugify/badge.svg?branch=master)](https://coveralls.io/github/combine/objection-slugify?branch=master)
 
 # Slugged models for Objection.js
 
