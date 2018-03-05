@@ -26,11 +26,12 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "$(npm bin)/babel index.js -d ./dist",
+    "build": "$(npm bin)/babel src -d dist",
     "jest": "$(npm bin)/jest -c ./test/support/jest.config.js",
     "test": "npm run jest",
     "cover": "npm run jest -- --coverage --forceExit",
-    "coveralls": "npm run cover && cat ./test/coverage/lcov.info | $(npm bin)/coveralls"
+    "coveralls": "npm run cover && cat ./test/coverage/lcov.info | $(npm bin)/coveralls",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "slug": "^0.9.1"
