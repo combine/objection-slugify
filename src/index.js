@@ -2,32 +2,32 @@ const slugify = require('slug');
 
 /**
  * Adds hooks to an Objection.Model to slugify from a source field.
- * @param {Objection.Model} The model class
  * @param {String} options.sourceField - Source field to slugify. Default: null
  * @param {String} options.slugField - Field to slugify. Default: 'slug'.
  * @param {Boolean} options.unique - Ensure slugs are unique. Default: false
+ * @param {Objection.Model} The model class
  */
-module.exports = {
-  Slugify: (Model, options) => {
-    // Provide some default options
-    const opts = Object.assign(
-      {
-        // The source field, or the source field to slugify
-        sourceField: null,
+module.exports = options => {
+  // Provide some default options
+  const opts = Object.assign(
+    {
+      // The source field, or the source field to slugify
+      sourceField: null,
 
-        // The name of the field to save the slug to
-        slugField: 'slug',
+      // The name of the field to save the slug to
+      slugField: 'slug',
 
-        // Ensure slugs are unique.
-        unique: false
-      },
-      options
-    );
+      // Ensure slugs are unique.
+      unique: false
+    },
+    options
+  );
 
-    if (!opts.sourceField || !opts.slugField) {
-      throw new Error('You must specify `sourceField` and `slugField`.');
-    }
+  if (!opts.sourceField || !opts.slugField) {
+    throw new Error('You must specify `sourceField` and `slugField`.');
+  }
 
+  return Model => {
     return class extends Model {
       $beforeInsert(context) {
         const maybePromise = super.$beforeInsert(context);
@@ -112,5 +112,5 @@ module.exports = {
         return current || original;
       };
     };
-  }
+  };
 };

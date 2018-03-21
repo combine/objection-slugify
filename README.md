@@ -15,18 +15,18 @@ npm install objection-slugify --save
 ## Usage
 ```js
 // Import the plugin.
-const Slugify = require('objection-slugify');
+const slugifyPlugin = require('objection-slugify');
 const { Model } = require('objection');
 
 // Mixin the plugin.
-const SluggedModel = Slugify(Model, {
+const slugify = slugifyPlugin({
   sourceField: 'title',
   slugField: 'slug',
   unique: true
 });
 
 // Create your model.
-class Post extends SluggedModel {
+class Post extends slugify(Model) {
   // ...code
 }
 

@@ -1,13 +1,13 @@
 import { Model } from 'objection';
-import { Slugify } from '../../src/index';
+import slugifyPlugin from '../../src/index';
 
-const SluggedModel = Slugify(Model, {
+const slugify = slugifyPlugin({
   sourceField: 'name',
   slugField: 'slugged',
   unique: true
 });
 
-export default class User extends SluggedModel {
+export default class User extends slugify(Model) {
   static modelPaths = [__dirname];
   static tableName = 'users';
   static jsonSchema = {
