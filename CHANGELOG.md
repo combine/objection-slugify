@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.0.1](https://github.com/combine/objection-slugify/tree/v2.0.1)
+
+- Fixed a bug that caused a unique slug to generate when patching an instance
+with the same source data.
+
 ## [v2.0.0](https://github.com/combine/objection-slugify/tree/v2.0.0)
 
 - Update plugin with mixin implementation as suggested by Objection.js's best
