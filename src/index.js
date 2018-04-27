@@ -44,11 +44,12 @@ module.exports = options => {
 
       $beforeUpdate(queryOptions, context) {
         const maybePromise = super.$beforeUpdate(queryOptions, context);
+        const { patch, old } = queryOptions;
 
         return Promise.resolve(maybePromise).then(async () => {
           const source = this[opts.sourceField];
 
-          if (source) {
+          if (source && patch && old && source !== old[opts.sourceField]) {
             const slug = await this.generateSlug(source);
             this[opts.slugField] = slug;
           }

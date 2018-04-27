@@ -32,12 +32,32 @@ describe('Slugify', function() {
   describe('on update', function() {
     describe('if the name is updated', function() {
       beforeAll(async function() {
-        await user.$query().patch({ name: 'Bar Baz' });
+        user = await user.$query().patchAndFetch({ name: 'Bar Baz' });
       });
 
       it('updates the slug', function() {
         expect(user.name).toEqual('Bar Baz');
         expect(user.slugged).toEqual('bar-baz');
+      });
+    });
+
+    describe('if the name is updated with the same name', function() {
+      let user;
+
+      beforeAll(async function() {
+        user = await User.query().insert({
+          name: 'Foo Bar',
+        });
+
+        user = await user.$query().patchAndFetch({
+          name: 'Foo Bar',
+          description: 'hello'
+        });
+      });
+
+      it('does not update the slug', function() {
+        expect(user.name).toEqual('Foo Bar');
+        expect(user.slugged).toEqual('foo-bar');
       });
     });
   });
