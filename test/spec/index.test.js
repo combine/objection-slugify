@@ -1,5 +1,5 @@
 import createModel from '../support/createModel';
-import slug from 'slug';
+import slugify from 'slugify';
 import faker from 'faker';
 
 let Model = createModel();
@@ -13,7 +13,7 @@ describe('on create', function() {
   });
 
   it('slugifies the name', function() {
-    expect(instance.slugged).toEqual(slug(name, { lower: true }));
+    expect(instance.slugged).toEqual(slugify(name, { lower: true }));
   });
 
   describe('when slug already exists', function() {
@@ -26,7 +26,7 @@ describe('on create', function() {
 
       it('creates a unique slug with a suffixed uuid', function() {
         expect(instance2.slugged).toMatch(
-          new RegExp(`${slug(name, { lower: true })}-(\\w+)`)
+          new RegExp(`${slugify(name, { lower: true })}-(\\w+)`)
         );
       });
 
@@ -43,7 +43,7 @@ describe('on create', function() {
 
         it('creates a slug with the specified suffix', function() {
           expect(instance2.slugged).toEqual(
-            `${slug(name, { lower: true })}-anything-we-want`
+            `${slugify(name, { lower: true })}-anything-we-want`
           );
         });
 
@@ -55,7 +55,7 @@ describe('on create', function() {
 
           it('defaults to using UUID as the suffix', function() {
             expect(instance2.slugged).toMatch(
-              new RegExp(`${slug(name, { lower: true })}-(\\w+)`)
+              new RegExp(`${slugify(name, { lower: true })}-(\\w+)`)
             );
           });
         });
@@ -70,7 +70,7 @@ describe('on create', function() {
 
       it('uses a non unique slug', function() {
         expect(instance.slugged).toEqual(instance2.slugged);
-        expect(instance2.slugged).toMatch(slug(name, { lower: true }));
+        expect(instance2.slugged).toMatch(slugify(name, { lower: true }));
       });
     });
   });
@@ -91,7 +91,7 @@ describe('on update', function() {
 
       it('updates the slug', function() {
         expect(instance.name).toEqual(newName);
-        expect(instance.slugged).toEqual(slug(newName, { lower: true }));
+        expect(instance.slugged).toEqual(slugify(newName, { lower: true }));
       });
     });
 
@@ -107,7 +107,7 @@ describe('on update', function() {
 
       it('does not update the slug', function() {
         expect(instance.name).toEqual(newName);
-        expect(instance.slugged).toEqual(slug(name, { lower: true }));
+        expect(instance.slugged).toEqual(slugify(name, { lower: true }));
       });
     });
   });
@@ -126,7 +126,7 @@ describe('on update', function() {
 
     it('does not update the slug', function() {
       expect(instance.name).toEqual(name);
-      expect(instance.slugged).toEqual(slug(name, { lower: true }));
+      expect(instance.slugged).toEqual(slugify(name, { lower: true }));
     });
   });
 });

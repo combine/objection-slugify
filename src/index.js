@@ -1,4 +1,4 @@
-const slugify = require('slug');
+const slugify = require('slugify');
 const uuid = require('uuid/v4');
 
 const MAX = 10;
