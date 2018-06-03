@@ -1,5 +1,10 @@
 # Changelog
 
+## [v3.0.1](https://github.com/combine/objection-slugify/tree/v3.0.1)
+
+- (Fix): Upgrade to `slugify` package which is better kept up-to-date.
+- (Fix): Run `npm audit fix`.
+
 ## [v3.0.0](https://github.com/combine/objection-slugify/tree/v3.0.0)
 
 - (Feature): Allow `opts.update` to be specified whether it updates the slug
