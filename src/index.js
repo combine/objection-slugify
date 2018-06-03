@@ -4,6 +4,7 @@ const slugify = require('slug');
  * Adds hooks to an Objection.Model to slugify from a source field.
  * @param {String} options.sourceField - Source field to slugify. Default: null
  * @param {String} options.slugField - Field to slugify. Default: 'slug'.
+ * @param {Boolean} options.update - Updates slug on record update. Default: true
  * @param {Boolean} options.unique - Ensure slugs are unique. Default: false
  * @param {Objection.Model} The model class
  */
@@ -11,13 +12,9 @@ module.exports = options => {
   // Provide some default options
   const opts = Object.assign(
     {
-      // The source field, or the source field to slugify
       sourceField: null,
-
-      // The name of the field to save the slug to
       slugField: 'slug',
-
-      // Ensure slugs are unique.
+      update: true,
       unique: false
     },
     options
@@ -47,11 +44,14 @@ module.exports = options => {
         const { patch, old } = queryOptions;
 
         return Promise.resolve(maybePromise).then(async () => {
-          const source = this[opts.sourceField];
 
-          if (source && patch && old && source !== old[opts.sourceField]) {
-            const slug = await this.generateSlug(source);
-            this[opts.slugField] = slug;
+          if (opts.update) {
+            const source = this[opts.sourceField];
+
+            if (source && patch && old && source !== old[opts.sourceField]) {
+              const slug = await this.generateSlug(source);
+              this[opts.slugField] = slug;
+            }
           }
         });
       }
