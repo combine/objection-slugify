@@ -45,6 +45,9 @@ The source of the slugged content.
 #### `slugField` (defaults to `slug`)
 The field to store the slug on.
 
+#### `update` (defaults to `true`)
+Specifies whether the slug is updated when the source field is updated.
+
 #### `unique` (defaults to `false`)
 Checks to see if the generated slug is unique in the table. If not, it will
 append a UUID to the end of the slug.

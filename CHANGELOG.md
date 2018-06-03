@@ -1,5 +1,12 @@
 # Changelog
 
+## [v3.0.0](https://github.com/combine/objection-slugify/tree/v3.0.0)
+
+- (Feature): Allow `opts.update` to be specified whether it updates the slug
+when the source field is updated.
+- (Feature): Use UUID as a default suffix, unless a custom generator
+(opts.generateUniqueSuffix) is specified.
+
 ## [v2.0.1](https://github.com/combine/objection-slugify/tree/v2.0.1)
 
 - Fixed a bug that caused a unique slug to generate when patching an instance
