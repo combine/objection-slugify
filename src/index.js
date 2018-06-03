@@ -1,12 +1,21 @@
 const slugify = require('slug');
+const uuid = require('uuid/v4');
+
+const MAX = 10;
 
 /**
  * Adds hooks to an Objection.Model to slugify from a source field.
- * @param {String} options.sourceField - Source field to slugify. Default: null
- * @param {String} options.slugField - Field to slugify. Default: 'slug'.
- * @param {Boolean} options.update - Updates slug on record update. Default: true
+ * @param {String} options.sourceField - Required. Source field for
+    slugification.
+ * @param {String} options.slugField - Required. Field to slugify.
+    Default: 'slug'.
+ * @param {Boolean} options.update - Whether or not to update the slug when the
+    source field is updates. Default: true.
  * @param {Boolean} options.unique - Ensure slugs are unique. Default: false
- * @param {Objection.Model} The model class
+ * @param {Function} options.generateUniqueSuffix - When unique is true, this
+    function is called when generating a unique suffix for the slug. If it not
+    specified, a random UUID generator will be used.
+ * @param {Objection.Model} The Objection model class
  */
 module.exports = options => {
   // Provide some default options
@@ -15,7 +24,8 @@ module.exports = options => {
       sourceField: null,
       slugField: 'slug',
       update: true,
-      unique: false
+      unique: false,
+      generateUniqueSuffix: null
     },
     options
   );
@@ -69,8 +79,12 @@ module.exports = options => {
       /** addSuffix()
        * Adds a suffix to the end of a slug
        */
-      addSuffix = (original, suffix) => {
-        return `${original}${suffix}`;
+      addSuffix = (original, generator = null) => {
+        if (typeof generator === 'function') {
+          return `${original}${generator(original)}`;
+        }
+
+        return `${original}-${uuid()}`;
       };
 
       /** checkSlug()
@@ -95,19 +109,17 @@ module.exports = options => {
        * unique, recursively doing so until a unique slug is found.
        * @param {String} original - The original (first) generated slug.
        * @param {String} current - The current iteration of the slug.
-       * @param {Number} count - The number of times this slug appears.
        */
       uniqueSlug = async (original, current = null, count = 0) => {
         const isUnique = await this.checkSlug(current || original);
 
-        if (!isUnique) {
-          count = count + 1;
+        if (!isUnique && count <= MAX) {
+          if (count === MAX) {
+            return this.uniqueSlug(original, this.addSuffix(original), count);
+          }
 
-          return this.uniqueSlug(
-            original,
-            this.addSuffix(original, `-${count}`),
-            count
-          );
+          count = count + 1;
+          return this.uniqueSlug(original, this.addSuffix(original, opts.generateUniqueSuffix), count);
         }
 
         return current || original;

@@ -21,8 +21,7 @@ const { Model } = require('objection');
 // Mixin the plugin.
 const slugify = slugifyPlugin({
   sourceField: 'title',
-  slugField: 'slug',
-  unique: true
+  slugField: 'slug'
 });
 
 // Create your model.
@@ -47,5 +46,10 @@ The source of the slugged content.
 The field to store the slug on.
 
 #### `unique` (defaults to `false`)
-Ensure that the slug is unique to the table by appending `-${n}` to the slug,
-where `n` is the number of times the same slug appears.
+Checks to see if the generated slug is unique in the table. If not, it will
+append a UUID to the end of the slug.
+
+#### `generateUniqueSuffix` (Function: String)
+A custom function that returns a string. Can be used to generate a custom suffix
+to the end of the slug. If `unique` is true and this is not specified, a random
+UUID will be appended to the slug.
