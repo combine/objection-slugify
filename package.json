@@ -27,12 +27,12 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "$(npm bin)/babel src -d dist",
-    "jest": "$(npm bin)/jest -c ./test/support/jest.config.js",
+    "build": "babel src -d dist",
+    "jest": "jest -c ./test/support/jest.config.js",
     "test": "npm run jest",
     "test:watch": "npm run jest -- --watch",
     "cover": "npm run jest -- --coverage --forceExit",
-    "coveralls": "npm run cover && cat ./test/coverage/lcov.info | $(npm bin)/coveralls",
+    "coveralls": "npm run cover && cat ./test/coverage/lcov.info | coveralls",
     "prepublish": "npm run build"
   },
   "dependencies": {
