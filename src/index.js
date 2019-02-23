@@ -68,7 +68,7 @@ module.exports = options => {
       }
 
       generateSlug = async str => {
-        const slug = slugify(str, Object.assign({}, { lower: true }, opts.slugifyOptions));
+        const slug = slugify(str, { lower: true, ...opts.slugifyOptions });
 
         if (opts.unique) {
           return await this.uniqueSlug(slug);
