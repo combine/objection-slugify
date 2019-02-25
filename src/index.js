@@ -25,7 +25,8 @@ module.exports = options => {
       slugField: 'slug',
       update: true,
       unique: false,
-      generateUniqueSuffix: null
+      generateUniqueSuffix: null,
+      slugifyOptions: {},
     },
     options
   );
@@ -67,7 +68,7 @@ module.exports = options => {
       }
 
       generateSlug = async str => {
-        const slug = slugify(str, { lower: true });
+        const slug = slugify(str, { lower: true, ...opts.slugifyOptions });
 
         if (opts.unique) {
           return await this.uniqueSlug(slug);

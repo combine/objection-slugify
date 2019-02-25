@@ -56,3 +56,6 @@ append a UUID to the end of the slug.
 A custom function that returns a string. Can be used to generate a custom suffix
 to the end of the slug. If `unique` is true and this is not specified, a random
 UUID will be appended to the slug.
+
+#### `slugifyOptions` (defaults to `{ lower: true } `)
+A set of options for the internal slugify library, options available [here](https://www.npmjs.com/package/slugify#options).
