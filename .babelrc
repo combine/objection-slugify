@@ -1,18 +1,18 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/env",
       {
         "targets": {
-          "node": "6",
-          "uglify": false
-        }
+          "node": "current"
+        },
+        "forceAllTransforms": false
       }
     ]
   ],
   "plugins": [
-    "transform-es2015-modules-commonjs",
-    "transform-class-properties",
-    "babel-plugin-transform-object-rest-spread"
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }
