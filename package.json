@@ -1,6 +1,6 @@
 {
   "name": "objection-slugify",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Automatically slugifies a source field.",
   "keywords": [
     "objection",
